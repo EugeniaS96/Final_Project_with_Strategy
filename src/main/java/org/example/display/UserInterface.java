@@ -81,16 +81,8 @@ public class UserInterface {
             case 2 -> currentData = fillStudentData(fillMethod, size, filePath);
             case 3 -> currentData = fillUserData(fillMethod, size, filePath);
         }
-
-        System.out.println("\nДанные успешно загружены!");
-        askToPrintData();
+        printCurrentData();
         askForNextAction();
-    }
-
-    private void askToPrintData() {
-        if (askYesNo("Хотите вывести данные на экран? (да/нет): ")) {
-            printCurrentData();
-        }
     }
 
     private void askForNextAction() {
@@ -109,18 +101,14 @@ public class UserInterface {
 
     private void performSorting() {
         if (checkEmptyData()) return;
-
-        System.out.println("\nВыполняется сортировка выбором...");
         sortCurrentData();
-        System.out.println("Данные успешно отсортированы!");
-        askToPrintData();
+        printCurrentData();
         askForNextAction();
     }
 
+
     private void performSearch() {
         if (checkEmptyData()) return;
-
-        System.out.println("\n=== Поиск элемента ===");
         searchCurrentData();
         askForNextAction();
     }
@@ -173,19 +161,6 @@ public class UserInterface {
     private void printCurrentData() {
         System.out.println("\n=== Текущие данные ===");
         currentData.forEach(System.out::println);
-    }
-
-    private boolean askYesNo(String question) {
-        while (true) {
-            System.out.print(question);
-            String input = scanner.nextLine().trim().toLowerCase();
-            if (input.equals("y") || input.equals("да")) {
-                return true;
-            } else if (input.equals("n") || input.equals("нет")) {
-                return false;
-            }
-            System.out.println("Пожалуйста, введите 'y' или 'n'");
-        }
     }
 
     private CustomArrayList<Bus> fillBusData(int method, int size, String filePath) {
